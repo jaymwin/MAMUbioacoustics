@@ -36,15 +36,36 @@ read_epicollect <- function(project_slug, token) {
   # read in csv of deployment/retrieval data
   df <-
     readr::read_csv(
-      res1$url #,
-      # col_types = cols(
-      #   `2_date` = 'D',
-      #   `4_sex` = 'c', # sex F = F, not FALSE
-      #   `29_date_baited` = 'D',
-      #   `17_photo_C_optional_` = 'c',
-      #   `18_photo_D_optional_` = 'c',
-      #   `30_comments` = 'c'
-      # )
-    )
+      res1$url
+    ) |>
+    dplyr::select(5:23, 28) |>
+    dplyr::rename(
+      deploy_or_retrieval = dplyr::matches('Deployment_or'),
+      deployer_name = dplyr::matches('Deployer_name'),
+      deployer_org = dplyr::matches('Deployer_organizat'),
+      uw_site_name = dplyr::matches('UW_site_name'),
+      cell_id = dplyr::matches('UW_cell'),
+      uw_mamu_station_id = dplyr::matches('UW_MAMU_station_ID'),
+      ncasi_site_name = dplyr::matches('NCASI_site_name'),
+      ncasi_mamu_station_id = dplyr::matches('NCASI_MAMU_station'),
+      cal_fire_site_name = dplyr::matches('CAL_FIRE_site_name'),
+      cal_fire_mamu_station_id = dplyr::matches('CAL_FIRE_MAMU_sta'),
+      swift_id = dplyr::matches('Swift_ID'),
+      deployed_sd_card_id = dplyr::matches('Deployed_SD_card'),
+      retrieved_sd_card_id = dplyr::matches('Retrieved_SD_card'),
+      aru_status = dplyr::matches('ARU_light'),
+      date = dplyr::matches('Date'),
+      time = dplyr::matches('Time'),
+      aru_photo_url = dplyr::matches('Picture_of_deploy'),
+      lat = dplyr::matches('lat_'),
+      long = dplyr::matches('long_'),
+      comments = dplyr::matches('Comments')
+    ) |>
+    dplyr::mutate(
+      site_name = dplyr::coalesce(uw_site_name, ncasi_site_name, cal_fire_site_name),
+      mamu_station_id = dplyr::coalesce(uw_mamu_station_id, ncasi_mamu_station_id, cal_fire_mamu_station_id),
+      date = lubridate::dmy(date)
+    ) |>
+    dplyr::select(deploy_or_retrieval:deployer_org, site_name, cell_id, mamu_station_id, swift_id:comments)
 
 }
