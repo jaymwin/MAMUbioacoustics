@@ -65,7 +65,7 @@ read_epicollect <- function(project_slug, token) {
       site_name = dplyr::coalesce(uw_site_name, ncasi_site_name, cal_fire_site_name),
       mamu_station_id = dplyr::coalesce(uw_mamu_station_id, ncasi_mamu_station_id, cal_fire_mamu_station_id),
       date = lubridate::dmy(date),
-      mamu_station_id = janitor::make_clean_names()
+      mamu_station_id = janitor::make_clean_names(mamu_station_id)
     ) |>
     dplyr::select(deploy_or_retrieval:deployer_org, site_name, cell_id, mamu_station_id, swift_id:comments)
 
