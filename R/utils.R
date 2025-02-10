@@ -23,7 +23,7 @@ create_flac_folders <- function(wav_file, output_dir, site_name, cell_id, statio
 # function to handle the file conversion process
 convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name, cell_id, station_id, swift_id) {
 
-  temp_path <- stringr::str_c(stringr::str_replace(stringr::str_remove(wav_file, basename(wav_file)), input_dir, temp_dir, basename(wav_file))
+  temp_path <- stringr::str_c(stringr::str_replace(stringr::str_remove(wav_file, basename(wav_file)), input_dir, temp_dir), basename(wav_file))
 
   fs::file_copy(
     path = wav_file,
