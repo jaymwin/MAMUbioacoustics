@@ -23,8 +23,8 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
   station <-
     deployment_df |>
     dplyr::filter(swift_id == swift) |>
-    dplyr::distinct(station_id) |>
-    dplyr::pull(station_id)
+    dplyr::distinct(mamu_station_id) |>
+    dplyr::pull(mamu_station_id)
 
   message(stringr::str_glue('{site}, {cell}, {station}'))
 
