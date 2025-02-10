@@ -1,4 +1,16 @@
 
+#' Perform WAV to FLAC compression
+#'
+#' @param deployment_df
+#' @param input_dir
+#' @param temp_dir
+#' @param output_dir
+#'
+#' @return
+#' @export
+#'
+#' @examples
+
 copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) {
 
   # List all .wav files in the input directory
