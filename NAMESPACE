@@ -2,4 +2,5 @@
 
 export(copy_compress_flacs)
 export(get_access_token)
+export(map_deployments)
 export(read_epicollect)
