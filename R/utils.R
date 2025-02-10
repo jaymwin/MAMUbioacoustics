@@ -23,7 +23,7 @@ create_flac_folders <- function(wav_file, output_dir, site_name, cell_id, statio
 # function to handle the file conversion process
 convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name, cell_id, station_id, swift_id) {
 
-  temp_path <- stringr::str_c(stringr::str_replace(stringr::str_remove(wav_file, basename(wav_file)), input_dir, stringr::str_c(temp_dir, '/')), basename(wav_file))
+  temp_path <- stringr::str_c(stringr::str_replace(stringr::str_remove(wav_file, basename(wav_file)), input_dir, temp_dir, basename(wav_file))
 
   fs::file_copy(
     path = wav_file,
@@ -32,7 +32,7 @@ convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name
   )
 
   # Define the output flac file path
-  output_file <- file.path(stringr::str_glue('{output_dir}/{site_name}/{cell_id}/{station_id}/{swift_id}_{stringr::str_extract(wav_file, "[0-9]{8}")}/{stringr::str_replace(basename(wav_file), ".wav", ".flac")}'))
+  output_file <- file.path(stringr::str_glue('{output_dir}/{site}/{cell}/{station}/{swift_id}_{stringr::str_extract(wav_file, "[0-9]{8}")}/{stringr::str_replace(basename(wav_file), ".wav", ".flac")}'))
 
   # Use sox to convert the wav file to flac
   # The '-C 8' option sets compression level for FLAC (range 0-8, where 8 is the highest compression)
