@@ -26,7 +26,7 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
     dplyr::distinct(mamu_station_id) |>
     dplyr::pull(mamu_station_id)
 
-  message(stringr::str_glue('{site}, {cell}, {station}'))
+  message(stringr::str_glue('site name = {site}, cell ID = {cell}, MAMU station ID = {station}'))
 
   wav_files |>
     purrr::walk(\(x) create_temp_folders(wav_file = x, input_dir = input_dir, temp_dir = temp_dir))
