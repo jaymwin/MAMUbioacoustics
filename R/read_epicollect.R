@@ -9,7 +9,7 @@
 #'
 #' @examples
 
-pull_epicollect <- function(project_slug, token) {
+read_epicollect <- function(project_slug, token) {
 
   # create url to access data
   # I removed form.ref from this string to get this working
