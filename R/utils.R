@@ -37,7 +37,7 @@ convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name
   # Use sox to convert the wav file to flac
   # The '-C 8' option sets compression level for FLAC (range 0-8, where 8 is the highest compression)
   seewave::sox(
-    stringr::str_glue("{temp_path} -C 5 {output_file}"),
+    stringr::str_glue('"{temp_path}" "{output_file}"'),
     path2exe = "C:/Program Files (x86)/sox-14-4-2"
   )
 
