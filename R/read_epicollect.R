@@ -41,8 +41,8 @@ read_epicollect <- function(project_slug, token) {
     dplyr::select(5:23, 28) |>
     dplyr::rename(
       deploy_or_retrieval = dplyr::matches('Deployment_or'),
-      deployer_name = dplyr::matches('Deployer_name'),
-      deployer_org = dplyr::matches('Deployer_organizat'),
+      deployer_name = dplyr::matches('Your_name'),
+      deployer_org = dplyr::matches('Your_organization'),
       uw_site_name = dplyr::matches('UW_site_name'),
       cell_id = dplyr::matches('UW_cell'),
       uw_mamu_station_id = dplyr::matches('UW_MAMU_station_ID'),
