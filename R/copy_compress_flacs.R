@@ -38,22 +38,26 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
     dplyr::distinct(mamu_station_id) |>
     dplyr::pull(mamu_station_id)
 
-  message(stringr::str_glue('site name = {site}, cell ID = {cell}, MAMU station ID = {station}'))
+  visit <-
+    deployment_df |>
+    dplyr::filter(swift_id == swift & visit_id == max(visit_id)) |>
+    dplyr::pull(visit_id) %>%
+    stringr::str_c('V', .)
+
+  message(stringr::str_glue('site name = {site}, visit ID = {visit}, cell ID = {cell}, MAMU station ID = {station}'))
 
   wav_files |>
     purrr::walk(\(x) create_temp_folders(wav_file = x, input_dir = input_dir, temp_dir = temp_dir))
 
   wav_files |>
-    purrr::walk(\(x) create_flac_folders(wav_file = x, output_dir = output_dir, site_name = site, cell_id = cell, station_id = station, swift_id = swift))
+    purrr::walk(\(x) create_flac_folders(wav_file = x, output_dir = output_dir, site_name = site, visit_id = visit, cell_id = cell, station_id = station, swift_id = swift))
 
   wav_files |>
-    furrr::future_walk(\(x) convert_to_flac(wav_file = x, input_dir = input_dir, temp_dir = temp_dir, output_dir = output_dir, site_name = site, cell_id = cell, station_id = station, swift_id = swift))
+    furrr::future_walk(\(x) convert_to_flac(wav_file = x, input_dir = input_dir, temp_dir = temp_dir, output_dir = output_dir, site_name = site, visit_id = visit, cell_id = cell, station_id = station, swift_id = swift))
 
-  # flac_files <- list.files(stringr::str_glue('{output_dir}/{site_name}/{cell_id}/{station_id}'), pattern = "\\.flac$", full.names = FALSE, recursive = TRUE)
+  flac_files <- list.files(stringr::str_glue('{output_dir}/{site_name}/{visit_id}/{cell_id}/{station_id}'), pattern = "\\.flac$", full.names = FALSE, recursive = TRUE)
 
-  # if(length(wav_files) != length(flac_files))
-
-  # stopifnot(length(wav_files) == length(flac_files))
+  stopifnot('Number of WAV files does not match number of FLAC files compressed' = length(wav_files) == length(flac_files))
 
   message("FLAC compression completed!")
 
