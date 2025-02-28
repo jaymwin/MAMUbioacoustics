@@ -59,7 +59,7 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
 
   stopifnot('Number of WAV files does not match number of FLAC files compressed' = length(wav_files) == length(flac_files))
 
-  message("FLAC compression completed!")
+  message(stringr::str_glue("{length(flac_files)} FLACs compressed!"))
 
   beepr::beep()
 
