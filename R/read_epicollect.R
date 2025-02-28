@@ -38,7 +38,7 @@ read_epicollect <- function(project_slug, token) {
     readr::read_csv(
       res1$url
     ) |>
-    dplyr::select(5:23, 28) |>
+    dplyr::select(5:24, 29) |>
     dplyr::rename(
       deploy_or_retrieval = dplyr::matches('Deployment_or'),
       deployer_name = dplyr::matches('Your_name'),
