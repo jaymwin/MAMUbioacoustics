@@ -49,6 +49,12 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
   wav_files |>
     furrr::future_walk(\(x) convert_to_flac(wav_file = x, input_dir = input_dir, temp_dir = temp_dir, output_dir = output_dir, site_name = site, cell_id = cell, station_id = station, swift_id = swift))
 
+  # flac_files <- list.files(stringr::str_glue('{output_dir}/{site_name}/{cell_id}/{station_id}'), pattern = "\\.flac$", full.names = FALSE, recursive = TRUE)
+
+  # if(length(wav_files) != length(flac_files))
+
+  # stopifnot(length(wav_files) == length(flac_files))
+
   message("FLAC compression completed!")
 
   beepr::beep()
