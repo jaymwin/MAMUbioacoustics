@@ -40,7 +40,8 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
 
   visit <-
     deployment_df |>
-    dplyr::filter(swift_id == swift & visit_id == max(visit_id)) |>
+    dplyr::filter(swift_id == swift) |>
+    dplyr::filter(visit_id == max(visit_id)) |>
     dplyr::pull(visit_id) %>%
     stringr::str_c('V', .)
 
