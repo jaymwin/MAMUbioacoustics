@@ -30,7 +30,7 @@ convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name
   fs::file_copy(
     path = wav_file,
     new_path = temp_path,
-    overwrite = FALSE
+    overwrite = TRUE
   )
 
   date <- stringr::str_extract(wav_file, '[0-9]{8}')
