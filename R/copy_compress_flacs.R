@@ -50,13 +50,16 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
   wav_files |>
     purrr::walk(\(x) create_temp_folders(wav_file = x, input_dir = input_dir, temp_dir = temp_dir))
 
-  wav_files |>
-    purrr::walk(\(x) create_flac_folders(wav_file = x, output_dir = output_dir, site_name = site, visit_id = visit, cell_id = cell, station_id = station, swift_id = swift))
+  dates <- unique(stringr::str_extract(wav_files, '[0-9]{8}'))
+
+  dates |>
+    purrr::walk(\(x) create_flac_folders(date = x, output_dir = output_dir, site_name = site, visit_id = visit, cell_id = cell, station_id = station))
 
   wav_files |>
     furrr::future_walk(\(x) convert_to_flac(wav_file = x, input_dir = input_dir, temp_dir = temp_dir, output_dir = output_dir, site_name = site, visit_id = visit, cell_id = cell, station_id = station, swift_id = swift))
 
-  flac_files <- list.files(stringr::str_glue('{output_dir}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}'), pattern = "\\.flac$", full.names = FALSE, recursive = TRUE)
+  flac_files <- list.files(stringr::str_glue('{output_dir}/{site}_{visit}/{site}_{visit}_{cell}_{station}'), pattern = "\\.flac$", full.names = FALSE, recursive = TRUE)
+  print(length(flac_files))
 
   stopifnot('Number of WAV files does not match number of FLAC files compressed' = length(wav_files) == length(flac_files))
 

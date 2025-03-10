@@ -3,18 +3,17 @@
 create_temp_folders <- function(wav_file, input_dir, temp_dir) {
 
   stringr::str_replace(
-    stringr::str_remove(wav_file, basename(wav_file)),
+    stringr::str_remove(stringr::str_replace(wav_file, "\\(-\\d{4}\\)", ""), basename(stringr::str_replace(wav_file, "\\(-\\d{4}\\)", ""))),
     input_dir,
-    stringr::str_c(temp_dir, '/')
+    temp_dir
   ) |>
     fs::dir_create()
 
 }
 
 # create flac folders on an external hard drive
-create_flac_folders <- function(wav_file, output_dir, site_name, visit_id, cell_id, station_id) {
+create_flac_folders <- function(date, output_dir, site_name, visit_id, cell_id, station_id) {
 
-  date <- stringr::str_extract(wav_file, '[0-9]{8}')
   fs::dir_create(
     path = stringr::str_glue('{output_dir}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}/{site_name}_{visit_id}_{cell_id}_{station_id}_{date}')
   )
