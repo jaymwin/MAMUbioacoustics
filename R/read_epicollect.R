@@ -72,6 +72,7 @@ read_epicollect <- function(project_slug, token) {
     dplyr::ungroup() |>
     dplyr::left_join(site_codes) |>
     dplyr::left_join(station_codes) |>
+    dplyr::mutate(station_code = tidyr::replace_na(station_code, 'AV999')) |>
     dplyr::select(deploy_or_retrieval:deployer_org, site_name, site_code, visit_id, cell_id, mamu_station_id, station_code, swift_id:comments)
 
 }

@@ -23,8 +23,8 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
   site <-
     deployment_df |>
     dplyr::filter(swift_id == swift) |>
-    dplyr::distinct(site_name) |>
-    dplyr::pull(site_name)
+    dplyr::distinct(site_code) |>
+    dplyr::pull(site_code)
 
   cell <-
     deployment_df |>
@@ -35,8 +35,8 @@ copy_compress_flacs <- function(deployment_df, input_dir, temp_dir, output_dir) 
   station <-
     deployment_df |>
     dplyr::filter(swift_id == swift) |>
-    dplyr::distinct(mamu_station_id) |>
-    dplyr::pull(mamu_station_id)
+    dplyr::distinct(station_code) |>
+    dplyr::pull(station_code)
 
   visit <-
     deployment_df |>
