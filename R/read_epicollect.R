@@ -64,12 +64,14 @@ read_epicollect <- function(project_slug, token) {
     dplyr::mutate(
       site_name = dplyr::coalesce(uw_site_name, ncasi_site_name, cal_fire_site_name),
       mamu_station_id = dplyr::coalesce(uw_mamu_station_id, ncasi_mamu_station_id, cal_fire_mamu_station_id),
-      date = lubridate::dmy(date),
-      mamu_station_id = gsub("[- ]", "_", tolower(mamu_station_id))
+      date = lubridate::dmy(date)#,
+      # mamu_station_id = gsub("[- ]", "_", tolower(mamu_station_id))
     ) |>
     dplyr::group_by(swift_id) |>
     dplyr::mutate(visit_id = dplyr::row_number() - 1) |>
     dplyr::ungroup() |>
-    dplyr::select(deploy_or_retrieval:deployer_org, site_name, visit_id, cell_id, mamu_station_id, swift_id:comments)
+    dplyr::select(deploy_or_retrieval:deployer_org, site_name, visit_id, cell_id, mamu_station_id, swift_id:comments) |>
+    dplyr::left_join(site_codes) |>
+    dplyr::left_join(station_codes)
 
 }
