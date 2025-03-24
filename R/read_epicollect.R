@@ -70,8 +70,8 @@ read_epicollect <- function(project_slug, token) {
     dplyr::group_by(swift_id) |>
     dplyr::mutate(visit_id = dplyr::row_number() - 1) |>
     dplyr::ungroup() |>
-    dplyr::select(deploy_or_retrieval:deployer_org, site_name, visit_id, cell_id, mamu_station_id, swift_id:comments) |>
     dplyr::left_join(site_codes) |>
-    dplyr::left_join(station_codes)
+    dplyr::left_join(station_codes) |>
+    dplyr::select(deploy_or_retrieval:deployer_org, site_name, site_code, visit_id, cell_id, mamu_station_id, station_code, swift_id:comments)
 
 }
