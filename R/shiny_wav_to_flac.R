@@ -37,7 +37,8 @@ shiny_wav_to_flac <- function() {
       # outputs that are printed
       shiny::mainPanel(
         shiny::htmlOutput("swift"),
-        shiny::htmlOutput("deployment_name"),
+        shiny::htmlOutput("mamu_site"),
+        shiny::htmlOutput("mamu_station"),
         shiny::htmlOutput("dates"),
         shiny::htmlOutput("n_wavs"),
         shiny::htmlOutput("pre_function_message"),
@@ -64,7 +65,11 @@ shiny_wav_to_flac <- function() {
       ""
     })
 
-    output$deployment_name <- shiny::renderText({
+    output$mamu_site <- shiny::renderText({
+      ""
+    })
+
+    output$mamu_station <- shiny::renderText({
       ""
     })
 
@@ -93,10 +98,11 @@ shiny_wav_to_flac <- function() {
       # get dates of wav files to create daily subfolders on external hard drive
       wav_dates <- unique(stringr::str_extract(sd_wavs, '[0-9]{8}'))
 
-      # get deployment name
+      # get deployment info
       site_id <- val$site
       station_id <- val$station
       visit_id <- val$visit
+
       # desktop/hard drive paths
       desktop_path <- input$desktop_path
       hard_drive_path <- input$hard_drive_path
@@ -107,9 +113,14 @@ shiny_wav_to_flac <- function() {
         shiny::HTML(stringr::str_glue("Swift ID: <b>{val$swift_id}</b>"))
       })
 
-      # deployment name
-      output$deployment_name <- shiny::renderText({
-        shiny::HTML(stringr::str_glue("Deployment name: <b>{val$deployment_name}</b>"))
+      # site
+      output$mamu_site <- shiny::renderText({
+        shiny::HTML(stringr::str_glue("Swift ID: <b>{val$site_id}</b>"))
+      })
+
+      # station
+      output$mamu_station <- shiny::renderText({
+        shiny::HTML(stringr::str_glue("Swift ID: <b>{val$station_id}</b>"))
       })
 
       # ARU recording dates
@@ -134,7 +145,7 @@ shiny_wav_to_flac <- function() {
         start_time <- Sys.time()
 
         # set cores for parallel flac compression
-        cb_set_future_cores()
+        future::plan(future::multisession, workers = parallelly::availableCores() - 1)
 
         # create date folders on external hard drive to store FLACs
         wav_dates |>
@@ -195,7 +206,11 @@ shiny_wav_to_flac <- function() {
         ""
       })
 
-      output$deployment_name <- shiny::renderText({
+      output$mamu_site <- shiny::renderText({
+        ""
+      })
+
+      output$mamu_station <- shiny::renderText({
         ""
       })
 
