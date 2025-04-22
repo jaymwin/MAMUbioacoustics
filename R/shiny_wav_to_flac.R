@@ -149,16 +149,16 @@ shiny_wav_to_flac <- function() {
 
         # create date folders on external hard drive to store FLACs
         wav_dates |>
-          furrr::future_walk(\(x) MAMUbioacoustics:::create_subfolders(x, deployment_name, hard_drive_path))
+          furrr::future_walk(\(x) MAMUbioacoustics:::create_subfolders(x, site_name, visit_id, station_id, cell_id, hard_drive_path))
 
         # compress flacs
         sd_wavs |>
-          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, deployment_name, desktop_path, hard_drive_path))
+          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, wav_path, site_name, visit_id, station_id, cell_id, desktop_path, hard_drive_path))
 
         # count # of flacs compressed
         n_flacs <-
           fs::dir_ls(
-            stringr::str_glue('{hard_drive_path}/{stringr::str_extract(deployment_name, "G(P|R|C|M|0)[0-9]{2}_V[1-5]{1}")}/{stringr::str_extract(deployment_name, "G(P|R|C|M|0)[0-9]{2}_V[1-5]{1}_C[0-9]{4}_U[1-4]{1}")}'),
+            stringr::str_glue('{hard_drive_path}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}'),
             recurse = TRUE,
             glob = '*.flac'
           ) |>
