@@ -37,6 +37,7 @@ shiny_wav_to_flac <- function() {
       # outputs that are printed
       shiny::mainPanel(
         shiny::htmlOutput("swift"),
+        shiny::htmlOutput("visit"),
         shiny::htmlOutput("mamu_site"),
         shiny::htmlOutput("mamu_station"),
         shiny::htmlOutput("cell"),
@@ -63,6 +64,10 @@ shiny_wav_to_flac <- function() {
     })
 
     output$swift <- shiny::renderText({
+      ""
+    })
+
+    output$visit <- shiny::renderText({
       ""
     })
 
@@ -104,7 +109,7 @@ shiny_wav_to_flac <- function() {
       wav_dates <- unique(stringr::str_extract(sd_wavs, '[0-9]{8}'))
 
       # get deployment info
-      site_id <- val$site_name
+      site_id <- val$site_id
       station_id <- val$station_id
       visit_id <- val$visit_id
       cell_id <- val$cell_id
@@ -117,6 +122,10 @@ shiny_wav_to_flac <- function() {
       # swift ID
       output$swift <- shiny::renderText({
         shiny::HTML(stringr::str_glue("Swift ID: <b>{val$swift_id}</b>"))
+      })
+
+      output$visit <- shiny::renderText({
+        shiny::HTML(stringr::str_glue("Visit ID: <b>{val$visit_id}</b>"))
       })
 
       # site
@@ -214,6 +223,10 @@ shiny_wav_to_flac <- function() {
       })
 
       output$swift <- shiny::renderText({
+        ""
+      })
+
+      output$visit <- shiny::renderText({
         ""
       })
 

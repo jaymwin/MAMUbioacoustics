@@ -115,7 +115,7 @@ get_deployment_info <- function(sd_card_path, deployment_df) {
     min_date = format(min_date, "%B %d"),
     max_date = format(max_date, "%B %d"),
     swift_id = swift,
-    site_name = site,
+    site_id = site,
     station_id = station,
     visit_id = visit,
     cell_id = cell
