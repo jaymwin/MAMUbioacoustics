@@ -124,17 +124,17 @@ get_deployment_info <- function(sd_card_path, deployment_df) {
 }
 
 
-create_subfolders <- function(x, site_name, visit_id, station_id, cell_id, hard_drive_path) {
+create_subfolders <- function(x, site_id, visit_id, station_id, cell_id, hard_drive_path) {
 
   fs::dir_create(
-    stringr::str_glue('{hard_drive_path}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}/{site_name}_{visit_id}_{cell_id}_{station_id}_{x}')
+    stringr::str_glue('{hard_drive_path}/{site_id}_{visit_id}/{site_id}_{visit_id}_{cell_id}_{station_id}/{site_id}_{visit_id}_{cell_id}_{station_id}_{x}')
   )
 
 }
 
 
 # convert SD wavs to SSD flacs
-wav_to_flac <- function(wav_path, site_name, visit_id, station_id, cell_id, desktop_path, hard_drive_path) {
+wav_to_flac <- function(wav_path, site_id, visit_id, station_id, cell_id, desktop_path, hard_drive_path) {
 
   wav_date_time <- stringr::str_extract(wav_path, '[0-9]{8}_[0-9]{6}')
   wav_desktop_path <- stringr::str_glue('{desktop_path}/{basename(wav_path)}')
@@ -145,7 +145,7 @@ wav_to_flac <- function(wav_path, site_name, visit_id, station_id, cell_id, desk
   )
 
   flac_ssd_path <-
-    stringr::str_glue('{hard_drive_path}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}/{site_name}_{visit_id}_{cell_id}_{station_id}_{wav_date_time}Z.flac')
+    stringr::str_glue('{hard_drive_path}/{site_id}_{visit_id}/{site_id}_{visit_id}_{cell_id}_{station_id}/{site_id}_{visit_id}_{cell_id}_{station_id}_{wav_date_time}Z.flac')
 
   # wav to flac compression
   seewave::sox(

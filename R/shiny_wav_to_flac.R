@@ -99,9 +99,9 @@ shiny_wav_to_flac <- function() {
       wav_dates <- unique(stringr::str_extract(sd_wavs, '[0-9]{8}'))
 
       # get deployment info
-      site_id <- val$site
-      station_id <- val$station
-      visit_id <- val$visit
+      site_id <- val$site_name
+      station_id <- val$station_id
+      visit_id <- val$visit_id
 
       # desktop/hard drive paths
       desktop_path <- input$desktop_path
@@ -115,12 +115,12 @@ shiny_wav_to_flac <- function() {
 
       # site
       output$mamu_site <- shiny::renderText({
-        shiny::HTML(stringr::str_glue("Swift ID: <b>{val$site_id}</b>"))
+        shiny::HTML(stringr::str_glue("Site ID: <b>{val$site_id}</b>"))
       })
 
       # station
       output$mamu_station <- shiny::renderText({
-        shiny::HTML(stringr::str_glue("Swift ID: <b>{val$station_id}</b>"))
+        shiny::HTML(stringr::str_glue("Station ID: <b>{val$station_id}</b>"))
       })
 
       # ARU recording dates
@@ -149,16 +149,16 @@ shiny_wav_to_flac <- function() {
 
         # create date folders on external hard drive to store FLACs
         wav_dates |>
-          furrr::future_walk(\(x) MAMUbioacoustics:::create_subfolders(x, site_name, visit_id, station_id, cell_id, hard_drive_path))
+          furrr::future_walk(\(x) MAMUbioacoustics:::create_subfolders(x, site_id, visit_id, station_id, cell_id, hard_drive_path))
 
         # compress flacs
         sd_wavs |>
-          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, wav_path, site_name, visit_id, station_id, cell_id, desktop_path, hard_drive_path))
+          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, wav_path, site_id, visit_id, station_id, cell_id, desktop_path, hard_drive_path))
 
         # count # of flacs compressed
         n_flacs <-
           fs::dir_ls(
-            stringr::str_glue('{hard_drive_path}/{site_name}_{visit_id}/{site_name}_{visit_id}_{cell_id}_{station_id}'),
+            stringr::str_glue('{hard_drive_path}/{site_id}_{visit_id}/{site_id}_{visit_id}_{cell_id}_{station_id}'),
             recurse = TRUE,
             glob = '*.flac'
           ) |>
