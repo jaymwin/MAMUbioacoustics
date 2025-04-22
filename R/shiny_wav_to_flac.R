@@ -79,13 +79,20 @@ shiny_wav_to_flac <- function() {
     # When the 'Run compression' button is clicked, run the function
     shiny::observeEvent(input$run_button, {
 
+      deployment_df <-
+        read_epicollect(
+          project_slug = 'mamu-arus',
+          token = '1fc5154632994f179f7d8b17214e26cb'
+        )
+
       # get deployment information from SD card
-      val <- get_deployment_info(input$sd_card_path)
+      val <- get_deployment_info(input$sd_card_path, deployment_df)
 
       # get list of wav paths
       sd_wavs <- fs::dir_ls(input$sd_card_path, recurse = TRUE, glob = '*.wav')
       # get dates of wav files to create daily subfolders on external hard drive
       wav_dates <- unique(stringr::str_extract(sd_wavs, '[0-9]{8}'))
+
       # get deployment name
       site_id <- val$site
       station_id <- val$station

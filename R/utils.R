@@ -60,7 +60,7 @@ convert_to_flac <- function(wav_file, input_dir, temp_dir, output_dir, site_name
 
 # shiny app functions -----------------------------------------------------
 
-get_deployment_info <- function(sd_card_path) {
+get_deployment_info <- function(sd_card_path, deployment_df) {
 
   # wav count
   n_wavs <- length(fs::dir_ls(sd_card_path, recurse = TRUE, glob = '*.wav'))
