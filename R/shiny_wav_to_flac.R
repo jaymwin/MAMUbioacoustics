@@ -13,7 +13,7 @@ shiny_wav_to_flac <- function() {
 
     shinyjs::useShinyjs(),  # Initialize shinyjs
 
-    shiny::titlePanel("Sierra Monitoring WAV to FLAC converter"),
+    shiny::titlePanel("MAMU WAV to FLAC converter"),
 
     # options to select SD card/hard drive/local paths
     # and buttons to run/reset app
