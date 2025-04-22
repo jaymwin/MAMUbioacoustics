@@ -173,7 +173,7 @@ shiny_wav_to_flac <- function() {
 
         # compress flacs
         sd_wavs |>
-          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, wav_path, site_id, visit_id, station_id, cell_id, desktop_path, hard_drive_path))
+          furrr::future_walk(\(x) MAMUbioacoustics:::wav_to_flac(x, site_id, visit_id, station_id, cell_id, desktop_path, hard_drive_path))
 
         # count # of flacs compressed
         n_flacs <-
