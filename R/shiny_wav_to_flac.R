@@ -39,6 +39,7 @@ shiny_wav_to_flac <- function() {
         shiny::htmlOutput("swift"),
         shiny::htmlOutput("mamu_site"),
         shiny::htmlOutput("mamu_station"),
+        shiny::htmlOutput("cell"),
         shiny::htmlOutput("dates"),
         shiny::htmlOutput("n_wavs"),
         shiny::htmlOutput("pre_function_message"),
@@ -73,6 +74,10 @@ shiny_wav_to_flac <- function() {
       ""
     })
 
+    output$cell <- shiny::renderText({
+      ""
+    })
+
     output$n_wavs <- shiny::renderText({
       ""
     })
@@ -102,6 +107,7 @@ shiny_wav_to_flac <- function() {
       site_id <- val$site_name
       station_id <- val$station_id
       visit_id <- val$visit_id
+      cell_id <- val$cell_id
 
       # desktop/hard drive paths
       desktop_path <- input$desktop_path
@@ -121,6 +127,11 @@ shiny_wav_to_flac <- function() {
       # station
       output$mamu_station <- shiny::renderText({
         shiny::HTML(stringr::str_glue("Station ID: <b>{val$station_id}</b>"))
+      })
+
+      # cell
+      output$cell <- shiny::renderText({
+        shiny::HTML(stringr::str_glue("Cell ID: <b>{val$cell_id}</b>"))
       })
 
       # ARU recording dates
@@ -207,6 +218,10 @@ shiny_wav_to_flac <- function() {
       })
 
       output$mamu_site <- shiny::renderText({
+        ""
+      })
+
+      output$cell <- shiny::renderText({
         ""
       })
 
