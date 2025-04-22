@@ -15,13 +15,18 @@ Imports:
     dplyr,
     fs,
     furrr,
+    here,
     httr,
+    magrittr,
     mapview,
     purrr,
     readr,
+    readxl,
     seewave,
     sf,
-    stringr
+    stringr,
+    tidyr,
+    usethis
 Depends: 
     R (>= 2.10)
 LazyData: true
