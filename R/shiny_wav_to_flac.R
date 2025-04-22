@@ -95,10 +95,7 @@ shiny_wav_to_flac <- function() {
     shiny::observeEvent(input$run_button, {
 
       deployment_df <-
-        read_epicollect(
-          project_slug = keyring::key_get('project_slug'),
-          token = keyring::key_get('token')
-        )
+        read_epicollect()
 
       # get deployment information from SD card
       val <- get_deployment_info(input$sd_card_path, deployment_df)
