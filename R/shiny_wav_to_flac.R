@@ -96,8 +96,8 @@ shiny_wav_to_flac <- function() {
 
       deployment_df <-
         read_epicollect(
-          project_slug = 'mamu-arus',
-          token = '1fc5154632994f179f7d8b17214e26cb'
+          project_slug = keyring::key_get('project_slug'),
+          token = keyring::key_get('token')
         )
 
       # get deployment information from SD card

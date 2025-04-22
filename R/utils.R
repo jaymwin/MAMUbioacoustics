@@ -145,7 +145,7 @@ wav_to_flac <- function(wav_path, site_id, visit_id, station_id, cell_id, deskto
   )
 
   flac_ssd_path <-
-    stringr::str_glue('{hard_drive_path}/{site_id}_{visit_id}/{site_id}_{visit_id}_{cell_id}_{station_id}/{site_id}_{visit_id}_{cell_id}_{station_id}_{wav_date_time}Z.flac')
+    stringr::str_glue('{hard_drive_path}/{site_id}_{visit_id}/{site_id}_{visit_id}_{cell_id}_{station_id}/{site_id}_{visit_id}_{cell_id}_{station_id}_{stringr::str_extract(wav_date_time, "[0-9]{8}")}/{site_id}_{visit_id}_{cell_id}_{station_id}_{wav_date_time}Z.flac')
 
   # wav to flac compression
   seewave::sox(

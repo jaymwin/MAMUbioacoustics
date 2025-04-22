@@ -4,7 +4,7 @@
 \alias{read_epicollect}
 \title{Get EpiCollect entries in tidy format}
 \usage{
-read_epicollect(project_slug, token)
+read_epicollect()
 }
 \arguments{
 \item{token}{}

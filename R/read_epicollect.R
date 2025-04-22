@@ -9,7 +9,10 @@
 #'
 #' @examples
 
-read_epicollect <- function(project_slug, token) {
+read_epicollect <- function() {
+
+  project_slug = keyring::key_get('project_slug')
+  token = keyring::key_get('token')
 
   # create url to access data
   # I removed form.ref from this string to get this working
@@ -36,7 +39,8 @@ read_epicollect <- function(project_slug, token) {
   # read in csv of deployment/retrieval data
   df <-
     readr::read_csv(
-      res1$url
+      res1$url,
+      show_col_types = FALSE
     ) |>
     dplyr::select(5:24, 29) |>
     dplyr::rename(
