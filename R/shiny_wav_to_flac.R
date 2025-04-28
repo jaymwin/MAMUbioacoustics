@@ -21,6 +21,7 @@ shiny_wav_to_flac <- function() {
       shiny::sidebarPanel(
         shiny::selectInput(
           "sd_card_path", "SD card path:",
+          # drive options
           choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", , "H:/" = "H:/", , "I:/" = "I:/", , "J:/" = "J:/"),
           selected = "D:/"
         ),
