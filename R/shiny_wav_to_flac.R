@@ -27,7 +27,7 @@ shiny_wav_to_flac <- function() {
         ),
         shiny::textInput("desktop_path", "Local path:", value = "C:/Users/jmwin/OneDrive/Desktop/temp"),
         shiny::selectInput(
-          # external hard drive options
+          # external hard drive options; needed to add more
           "hard_drive_path", "External hard drive path:",
           choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", , "H:/" = "H:/", , "I:/" = "I:/", , "J:/" = "J:/"),
           selected = "E:/"
