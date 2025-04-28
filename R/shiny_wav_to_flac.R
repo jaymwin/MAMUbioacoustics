@@ -22,14 +22,14 @@ shiny_wav_to_flac <- function() {
         shiny::selectInput(
           "sd_card_path", "SD card path:",
           # SD options
-          choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", "H:/" = "H:/", , "I:/" = "I:/", , "J:/" = "J:/"),
+          choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", "H:/" = "H:/", "I:/" = "I:/", "J:/" = "J:/"),
           selected = "D:/"
         ),
         shiny::textInput("desktop_path", "Local path:", value = "C:/Users/jmwin/OneDrive/Desktop/temp"),
         shiny::selectInput(
           # external hard drive options; needed to add more
           "hard_drive_path", "External hard drive path:",
-          choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", "H:/" = "H:/", , "I:/" = "I:/", , "J:/" = "J:/"),
+          choices = c("D:/" = "D:/", "E:/" = "E:/", "F:/" = "F:/", "G:/" = "G:/", "H:/" = "H:/", "I:/" = "I:/", "J:/" = "J:/"),
           selected = "E:/"
         ),
         shiny::actionButton("run_button", "Run FLAC compression", style = "background-color: #458B74; color: white;", icon = shiny::icon('play')),
