@@ -137,7 +137,8 @@ create_subfolders <- function(x, site_id, visit_id, station_id, cell_id, hard_dr
 wav_to_flac <- function(wav_path, site_id, visit_id, station_id, cell_id, desktop_path, hard_drive_path) {
 
   wav_date_time <- stringr::str_extract(wav_path, '[0-9]{8}_[0-9]{6}')
-  wav_desktop_path <- stringr::str_glue('{desktop_path}/{basename(wav_path)}')
+  # wav_desktop_path <- stringr::str_glue('{desktop_path}/{basename(wav_path)}')
+  wav_desktop_path <- stringr::str_replace(stringr::str_glue('{desktop_path}/{basename(wav_path)}'), "\\(-?\\d+\\)(?=\\.wav$)", "")
 
   fs::file_copy(
     wav_path,
